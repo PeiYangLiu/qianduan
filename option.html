@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <body ng-controller="MainCtrl as mainctrl">
+    	<!-- ng-option必须和ng-model一起使用 -->
+		<!-- 普通的数组选择 -->
+    	<select ng-model="mainctrl.zhi" ng-options="item for item in mainctrl.arr"></select>
+		<!-- 数组映射选择 -->
+    	<select ng-model="mainctrl.zhi" ng-options="item.phone as item.city for item in mainctrl.arr2"></select>
+    	{{mainctrl.zhi}}
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+    myapp.controller("MainCtrl",[function(){
+    	this.zhi = "东风";
+    	this.arr = ["东风","二条","幺鸡"];
+    	this.arr2 = [
+    		{"phone":"0731","city":"长沙"},
+    		{"phone":"010","city":"北京"},
+    		{"phone":"029","city":"西安"},
+    	]
+    }]);
+    </script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+   <!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <body>
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <section ng-controller="MainCtrl as mainctrl">
+        <input type="text" ng-model="mainctrl.a">
+        <input type="button" value="设置" ng-click="mainctrl.set()">
+    </section>
+    <section ng-controller="MainCtrl2 as mainctrl2">
+        <h1>{{mainctrl2.getA()}}</h1>
+    </section>
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+    //MathService通过依赖注入，有效防止代码混淆
+    //导致变量名不对而产生bug
+    myapp.controller("MainCtrl",["MathService",function(MathService){
+        this.set = function(){
+            MathService.a = this.a;
+        }
+    }]);
+    // controller可以实例化多个
+    myapp.controller("MainCtrl2",["MathService",function(MathService){
+        this.getA = function(){
+            return MathService.a;
+        }
+    }]);
+    //服务式单例的，只会被实例化一次
+    myapp.service("MathService",[function(){
+        //用this定义一个方法
+        this.a = 0;
+    }]);
+    </script>
+</html>

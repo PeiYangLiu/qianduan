@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/*#demo {
+			width: 1200px;
+			height: 1200px;
+		}*/
+		/*不要用css设置canvas的宽高，会导致canvas拉伸*/
+	</style>
+</head>
+<body>
+	<!-- 设置canvas的宽高通过属性设置，不要通过css -->
+	<canvas id="demo" width="600" height="600">
+		
+	</canvas>
+
+	<script>
+	var canvas = document.getElementById("demo");
+	// 获取上下文
+	canvas.width = 600;
+	canvas.height = 600;//通过属性设置宽高
+	// canvas.style.height = 1200 这就是通过CSS设置，不要这么做
+	var ctx = canvas.getContext("2d");
+	// 设置画图路线
+	ctx.moveTo(100, 100);//把画笔移动到100,100
+	ctx.lineTo(200, 100);//从当前位置画一条直线到200,100
+	ctx.lineTo(100, 200);
+	// ctx.lineTo(100, 100); 
+	ctx.closePath();
+	// 绘制设置的路线
+	ctx.strokeStyle = "red";//设置画笔颜色
+	ctx.lineWidth = 4;//设置画笔宽度
+	ctx.fillStyle = "green";//设置填充颜色
+	ctx.fill();//填充，默认为黑色
+	ctx.stroke();
+	</script>
+</body>
+</html>

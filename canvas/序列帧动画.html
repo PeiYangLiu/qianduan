@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="cavsElem">
+		
+	</canvas>
+	<script>
+	(function(){
+		var canvas = document.getElementById("cavsElem");
+		var ctx = canvas.getContext("2d");
+		canvas.width = 600;
+		canvas.height = 600;
+		canvas.style.border = "1px solid #000";
+		var img2 = new Image();
+		img2.src = "imgs/gameImgs/DMMban.png";
+		img2.onload = function(){
+			//图片加载完成后，将图片绘制到canvas上
+			//drawImage(img,sx,sy,swidth,sheight,x,y,width,height)
+			//sx:裁剪图片起始点的横坐标
+			//sy:裁剪图片起始点的纵坐标
+			//swidth:裁剪图片起始点的宽度
+			//sheight:裁剪图片起始点的高度
+			var frameIndex = 0;
+			setInterval(function(){
+				// 清除之前图片的墨迹
+				// ctx.clearRect(0, 0, canvas.width, canvas.height)
+				// 如果通过代码设置canvas的宽高，则内部所有东西都被清空
+				canvas.width = canvas.width;
+				ctx.drawImage(
+					img2,
+					frameIndex*40,
+					0,
+					40,
+					65,
+					300,
+					300,
+					40,
+					65);
+				frameIndex++;
+				frameIndex %= 4;
+			},1000/10);//1秒绘制10帧
+			
+		}
+	}());
+	</script>
+</body>
+</html>

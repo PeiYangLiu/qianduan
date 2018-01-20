@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="cavsElem" width="600" height="600"></canvas>
+</body>
+
+<script>
+	var canvas = document.getElementById("cavsElem");
+	var ctx = canvas.getContext("2d");
+	canvas.width = 600;
+	canvas.height = 600;
+	canvas.style.border = "1px solid #000";
+	ctx.strokeStyle = "red";
+	ctx.lineWidth = 20;
+	//第一条线
+	ctx.moveTo(100, 100);
+	ctx.lineTo(300, 100);
+	ctx.stroke();
+	//绘制第二条线
+	//使用beginPath开启一个新的状态，之前状态设置的样式可以遗传到之后的状态，之后状态改变的样式不会影响到以前的状态。
+	ctx.beginPath();
+	ctx.strokeStyle = "green";
+	ctx.moveTo(100, 200);
+	ctx.lineTo(300, 200);
+	ctx.stroke();
+</script>
+</html>

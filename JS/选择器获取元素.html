@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 200px;
+			height: 200px;
+			background-color: black;
+
+		}
+		.hide {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="div" id="a"></div>
+	<div class="div" id="b"></div>
+	<div class="div" id="c"></div>
+	<input type="button" value="hide" id="button">
+	<script>
+	// 通过CSS选择器获取元素
+	// 当有多个符合条件的元素的时候返回第一个
+	var id = document.querySelector("#a");
+	console.log(id);
+	var divs = document.querySelectorAll(".div");
+	console.log(divs);
+	var hide = document.getElementById("button");
+	hide.onclick = function(){
+		id.className = "hide";//可以通过改变className来改变样式
+	}
+	</script>
+</body>
+</html>

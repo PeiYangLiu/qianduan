@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="cavsElem">
+		
+	</canvas>
+	<script>
+	function drawX(ctx,x0,y0,arrowWidth){
+		ctx.beginPath();
+		ctx.strokeStyle = "blue";
+		ctx.moveTo(x0, y0);
+		ctx.lineTo(500, y0);
+		ctx.lineTo(500-arrowWidth,y0-arrowWidth);
+		ctx.moveTo(500, y0);
+		ctx.lineTo(500-arrowWidth,y0+arrowWidth);
+		ctx.stroke();
+	}
+	function drawY(ctx,x0,y0,arrowWidth){
+		ctx.beginPath();
+		ctx.strokeStyle = "blue";
+		ctx.moveTo(x0, y0);
+		ctx.lineTo(x0, 0);
+		ctx.lineTo(x0-arrowWidth,0+arrowWidth);
+		ctx.moveTo(x0, 0);
+		ctx.lineTo(x0+arrowWidth,0+arrowWidth);
+		ctx.stroke();
+	}
+	function drawPoints(ctx,x0,y0,data,pointWith){
+		ctx.beginPath();//beginPath之后画笔位置为空
+		// ctx.moveTo(x0, y0);
+		ctx.strokeStyle = "green";
+		for(var i=0;i<data.length;i++){
+			ctx.lineTo(x0+(i+1)*pointWith, y0*(1-data[i]));
+		}
+		ctx.stroke();
+	}
+	(function(){
+		var canvas = document.getElementById("cavsElem");
+		var ctx = canvas.getContext("2d");
+		canvas.width = 600;
+		canvas.height = 600;
+		canvas.style.border = "1px solid #000";
+		// 绘制X轴
+		var x0 = 100;
+		var y0 = 400;
+		var maxHeight = 300;
+		var arrowWidth = 10;
+		var data = [0.4, 0.5, 0.8, 0.7];
+		var pointWith = 400 / (data.length+1);
+		drawX(ctx,x0,y0,arrowWidth);
+		drawY(ctx,x0,y0,arrowWidth);
+		drawPoints(ctx,x0,y0,data,pointWith);
+	}());
+	</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="cavsElm" width="600" height="600">
+		
+	</canvas>
+</body>
+<script>
+	var canvas = document.getElementById("cavsElm");
+	var ctx = canvas.getContext("2d");
+	canvas.width = 600;
+	canvas.height = 600;
+	canvas.style.border = "1px solid #000";
+	// 绘制一条0到30度的弧
+	// 弧度和角度的转换公式：rad=30*Math.PI/180
+	// ctx.arc(300,300,300,0*Math.PI/180,30*Math.PI/180,false);//第三个参数是半径,第五个参数为是否逆时针，默认为false
+	// ctx.closePath();
+	// ctx.stroke();
+	var data = [{
+		"value": .2,
+		"color": "red",
+		"title": "应届生"
+	},{
+		"value": .3,
+		"color": "blue",
+		"title": "社会招生"
+	},{
+		"value": .4,
+		"color": "green",
+		"title": "老学员推荐"
+	},{
+		"value": .1,
+		"color": "#ccc",
+		"title": "公开课"
+	}];
+	//从-90度开始绘制
+	var tempAngle = -90;
+	for(var i=0;i<data.length;i++){
+		ctx.beginPath();
+		ctx.moveTo(400, 400);
+		ctx.strokeStyle = data[i].color;
+		ctx.fillStyle = data[i].color;
+		var angle = data[i].value*360;
+		var startAngle = tempAngle*Math.PI/180;
+		var endAngle = (tempAngle+angle)*Math.PI/180;
+		tempAngle = tempAngle+angle;
+		ctx.arc(400, 400, 200, startAngle, endAngle, false);
+		ctx.fill();
+	}
+</script>
+</html>

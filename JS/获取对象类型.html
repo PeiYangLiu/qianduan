@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script>
+	
+	var box = document.getElementById("box");
+	var arr = [];
+	console.log(typeof arr);//typeof智能精确识别基本数据类型，对对象而言一律返回object
+	console.log(typeof box);
+	console.log(box);//会打印标签，如果想打印对象要用dir
+	console.dir(box);
+	console.log(box.constructor);
+	console.log(arr.constructor);
+</script>
+</html>

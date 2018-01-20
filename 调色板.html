@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+        <style type="text/css">
+        .box{
+            width:200px;
+            height:200px;
+            border:1px solid;
+            border-color: black;
+
+        }
+        </style>
+    </head>
+    <!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+    <body ng-app="myapp">
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <div ng-controller="MainCtrl as mainctrl">
+    
+        <!-- 使用ng-style修改样式 -->
+        <div class="box" ng-style="mainctrl.GetYanse()"></div>
+        <p>
+            <input type="range" max="255" min="0" ng-model="mainctrl.r">
+            <input type="text" ng-model="mainctrl.r">
+        </p>
+        <p>
+            <input type="range" max="255" min="0" ng-model="mainctrl.g">
+            <input type="text" ng-model="mainctrl.g">
+        </p>  
+        <p>
+            <input type="range" max="255" min="0" ng-model="mainctrl.b">
+            <input type="text" ng-model="mainctrl.b">
+        </p>
+    </div>
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+    myapp.controller("MainCtrl",[function(){
+        this.r = 0;
+        this.g = 0;
+        this.b = 0;
+    	//this.yanse = {"background-color" : "rgb("+this.r+","+this.b+","+this.g+")"}
+        //上面这行当input中改变r，g，b时颜色不会变
+        //因为此时改的是r，g，b的值，而本质上改变
+        //style是传了写好的样式字符串进去，此时
+        //字符串已经生成了，不会因为r，g，b值的
+        //改变而改变，在由于值改变而导致样式改变
+        //的双向数据绑定中，必需使用函数来返回该样式
+        this.GetYanse = function(){
+            return {"background-color" : "rgb("+this.r+","+this.b+","+this.g+")"};
+        }
+    }]);
+    </script>
+</html>

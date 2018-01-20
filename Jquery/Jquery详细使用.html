@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+	* {
+		padding : 0;
+		margin : 0;
+	}
+	div {
+		height: 200px;
+		background: pink;
+	}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<input type="button" value="我是按钮" id="demo">
+	<div></div>
+	<script>
+		$(function(){
+			$("#demo").click(function(){
+				// 以下三种方法都能改变样式
+				$("div").css({
+					backgroundColor : "black",
+					width : "200px"
+				});
+				$("div").css("height","500px");
+				
+				// 以下两种方法可以获取样式
+				alert($("div").css("height"));
+				$("div").css("width",function(index,value){
+					// index指明了选择器选出来的元素索引
+					// value为取出的css的value
+					alert(value);
+				});
+			});
+		});
+	</script>
+</body>
+</html>

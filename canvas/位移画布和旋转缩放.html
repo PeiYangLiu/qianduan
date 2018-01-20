@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="cavsElem">
+		
+	</canvas>
+	<script>
+	(function(){
+		var canvas = document.getElementById("cavsElem");
+		var ctx = canvas.getContext("2d");
+		canvas.width = 600;
+		canvas.height = 600;
+		canvas.style.border = "1px solid #000";
+		ctx.fillRect(0, 0, 40, 40);//画好的东西不受之后画布改变的影响
+		ctx.save();//保存画布初始状态
+		// 将画布移动到200,200
+		ctx.translate(200, 200);
+		// 将画布旋转指定弧度
+		ctx.rotate(30*Math.PI/180);
+		// 将画布缩放x,y倍
+		ctx.scale(1.2, 1.2);
+		// 设置画布透明度
+		ctx.globalAlpha=0.3;
+		ctx.moveTo(0, 0);
+		ctx.lineTo(200, 200);
+		ctx.stroke();
+		ctx.fillRect(10, 10, 40, 40);
+		// 绘制完毕后恢复画布初始状态
+		ctx.restore();
+		ctx.fillRect(100,100,40,40);
+	}());
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+	* {
+		padding : 0;
+		margin : 0;
+	}
+	div {
+		height: 200px;
+		background: pink;
+		margin-bottom: 10px;
+		display: none;
+	}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<input type="button" value="我是按钮" id="demo">
+	<div></div>
+	<div></div>
+	<div></div>
+	<script>
+		// 入口函数第一种写法
+		$(document).ready(function(){
+			$("#demo").click(function(){
+				$("div").show(1000).html("我是内容");
+			});
+		});
+		// 入口函数第二种写法,两种效果一样
+		$(function(){
+			$("#demo").click(function(){
+				$("div").show(1000).html("我是内容");
+			});
+		});
+	</script>
+</body>
+</html>

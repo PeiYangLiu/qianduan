@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="cavsElem">
+		
+	</canvas>
+
+	<script>
+	(function(){
+		var canvas = document.getElementById("cavsElem");
+		var ctx = canvas.getContext("2d");
+		canvas.width = 600;
+		canvas.height = 600;
+		canvas.style.border = "1px solid #000";
+		var canvasHide = document.createElement("canvas");
+		canvasHide.width = canvas.width;
+		canvasHide.height = canvas.height;
+		var ctxHide = canvasHide.getContext("2d");
+		ctxHide.fillRect(0, 0, 100, 100);
+		ctx.drawImage(canvasHide,0,0);
+	}());
+	</script>
+</body>
+</html>

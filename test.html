@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<title>Document</title>
+</head>
+<body ng-controller="MainCtrl as mainctrl">
+	{{mainctrl.getA()}}
+	<input type="text" ng-model="mainctrl.a" ng-change="mainctrl.set()">
+	<input type="button" ng-click="mainctrl.add()">
+</body>
+<script>
+	var myapp = angular.module("myapp",[]);
+	myapp.controller("MainCtrl",["Service",function(Service){
+		this.getA = function(){
+			this.a = Service.get();
+			return Service.get();
+		}
+		this.set = function(){
+			Service.set(this.a);
+		}
+		this.add = function(){
+			Service.add();
+		}
+	}]);
+	myapp.factory("Service",[function(){
+		var a = 0;
+		function add(){
+			a++;
+		}
+		function get(){
+			return a;
+		}
+		function set(num){
+			a = num;
+		}
+		return {
+			get : get,
+			add : add,
+			set : set
+		}
+	}]);
+</script>
+</html>

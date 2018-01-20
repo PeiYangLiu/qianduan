@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <body >
+        <!-- 加上指令标记，标记必须和directive中指定的字符串相同，且忽略大小写，大写字母前一个位置加上短横 -->
+    	<div my-d-i-r-c-t></div>
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //这个myDirect可以变，且每出现一个大写字母就表示在标记中要用短横隔断，且首字母
+    //不能大写，比如：
+    //myDirct 标记为my-dirct，myDIRCT标记为my-d-i-r-c-t  标记忽略大小写
+    myapp.directive("myDIRCT",[function(){
+        //返回一个指令定义对象
+        return {
+            // restrict是规定指令生效的范围，默认为AE,
+            // A代表atrribute即属性，如<div my-d-i-r-c-t></div>
+            // E代表element即元素，如<my-d-i-r-c-t></my-d-i-r-c-t>
+            // C代表class即类，如<div class="my-d-i-r-c-t"></div>
+            restrict : "AEC",
+            //temlateUrl是用ajax获取外部页面，只能在服务器上运行，静态页面无效
+            //temlateUrl : "./template外联式写法.html"
+            template : "<h1>你好</h1>",
+            
+        }
+    }]);
+    
+    </script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <body >
+    	<div ng-controller="MainCtrl as mainctrl">
+    		
+    	</div>
+    	
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+   
+    myapp.controller("MainCtrl",["mathProvider",function(mathProvider){
+        //这样写是会出错的,provider里的方法是供config配置使用的
+        //mathProvider.setA(110);
+        mathProvider.a = 10;//这样可以直接更改a值
+        mathProvider.setA1(105);
+        //下列两行返回值会不同，因为mathProvider.a是与get，set一起返回的json
+        //中的元素，返回的那一刻就已经进入内存确定了。而setA1(105)修改的是provider中
+        //的a，getA1()则会重新请求provider中的a。
+        alert(mathProvider.getA1());
+        alert(mathProvider.a);
+    }]);
+    //这是angular的固定写法，在mathProvider后再加Provider做形参，会自动识别
+    //这个config无论写在controller前面还是后面，都会先执行config
+    //这种先看一遍全部代码，再按规定顺序（不是写的顺序）执行的原则，叫做AMD规范
+    //所有内置函数都是可以用config来配置的
+    myapp.config(function(mathProviderProvider){
+        mathProviderProvider.setA(110);
+    });
+    myapp.provider("mathProvider",function(){
+        var a = 886;
+        return{
+            setA : function(number){
+                a = number;
+            },
+            $get : function(){
+                
+                return {
+                    a : a,
+                    setA1 : function(num){
+                        a = num;
+                    },
+                    getA1 : function(){
+                        return a;
+                    }
+                }
+            }
+        }
+    });
+    </script>
+</html>

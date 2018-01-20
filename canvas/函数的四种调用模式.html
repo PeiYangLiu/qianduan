@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 第一种
+		function add(a,b){
+			console.log(this);//直接调用函数this为window
+		}
+		add();
+		// 第二种
+		function Cat(){
+			var temp = this;
+			this.show = function(){
+				console.log(this);
+				console.log(temp===this);
+			}
+		}
+		var c = new Cat();
+		c.show();//通过对象调用
+		// 第三种：构造器调用模式
+		function Dog(){
+			console.log(this);//与show里面的this相同
+			this.show = function(){
+				alert(1);//不会被执行
+				console.log(this);
+			}
+		}
+		var d = new Dog();
+	</script>
+</body>
+</html>

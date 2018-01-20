@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+   <!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <section ng-controller="MainCtrl as mainctrl">
+        
+    </section>
+    </body>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+    <script>
+    var myapp = angular.module('myapp', ["ui.router"]);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+    //MathService通过依赖注入，有效防止代码混淆
+    //导致变量名不对而产生bug
+    
+    </script>
+</html>

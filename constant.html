@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <body >
+    	<div ng-controller="MainCtrl as mainctrl">
+    		<input type="text" ng-model="mainctrl.m" ng-change="mainctrl.set()">
+    		{{mainctrl.m}}
+    	</div>
+    	<div ng-controller="MainCtrl2 as mainctrl2">
+    		{{mainctrl2.getm2()}}
+    	</div>
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+    myapp.controller("MainCtrl",["constService",function(constService){
+    	this.set = function(){
+    		constService.pi=this.m;
+    	}
+    }]);
+    myapp.controller("MainCtrl2",["constService",function(constService){
+    	this.getm2 = function(){
+    		return constService.pi;
+    	}
+    }]);
+    myapp.constant("constService",{
+    	pi : 3.14,
+    	phone : {
+    		"北京" : "010",
+    		"广州" : "020"
+    	}
+    	//js面向函数编程，可以把函数当成对象传
+    	mianji : function(r){
+    		return this.pi*r*r;
+    	}
+    });
+    </script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="cavsElm" width="600" height="600">
+		
+	</canvas>
+</body>
+<script>
+	function getX(o,x0,angle){
+		var x = x0*Math.cos(angle*Math.PI/180)+o;
+		return x;
+	}
+	function getY(o,y0,angle){
+		var y = y0*Math.sin(angle*Math.PI/180)+o;
+		return y;
+	}
+	var canvas = document.getElementById("cavsElm");
+	var ctx = canvas.getContext("2d");
+	canvas.width = 900;
+	canvas.height = 700;
+	canvas.style.border = "1px solid #000";
+	var data = [{
+		"value": .2,
+		"color": "red",
+		"title": "应届生"
+	},{
+		"value": .3,
+		"color": "blue",
+		"title": "社会招生"
+	},{
+		"value": .4,
+		"color": "green",
+		"title": "老学员推荐"
+	},{
+		"value": .1,
+		"color": "#ccc",
+		"title": "公开课"
+	}];
+	//从-90度开始绘制
+	var tempAngle = -90;
+	for(var i=0;i<data.length;i++){
+		ctx.beginPath();
+		ctx.moveTo(400, 400);
+		ctx.strokeStyle = data[i].color;
+		ctx.fillStyle = data[i].color;
+		var angle = data[i].value*360;
+		var startAngle = tempAngle*Math.PI/180;
+		var endAngle = (tempAngle+angle)*Math.PI/180;
+		ctx.arc(400, 400, 200, startAngle, endAngle, false);
+		//绘制文字
+		var txt = data[i].value*100+"%";
+		//计算文字的角度
+		var txtAngle = tempAngle + angle*0.5;
+		//获取文字的坐标
+		var x = getX(400,200+20,txtAngle);
+		var y = getY(400,200+20,txtAngle);
+		// 防止在饼图左边的文字由于文字过长而进入图内
+		if(txtAngle>90&&txtAngle<270)
+			ctx.textAlign = "end";
+		ctx.fillText(txt, x, y);
+		ctx.fill();
+		tempAngle = tempAngle+angle;
+	}
+</script>
+</html>

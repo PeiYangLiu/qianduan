@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <body ng-controller="MainCtrl as mainctrl">
+    <table>
+    <tr>
+        <!-- ng-show可以根据判别式来决定元素是否能显示 -->
+        <th>学号<a ng-click="mainctrl.SortBySid()"><span ng-show="mainctrl.sortBy=='sid'">{{mainctrl.arrow}}</span></a></th>
+        <th>姓名<span ng-show="mainctrl.sortBy=='name'">{{mainctrl.arrow}}</span></th>
+        <th>语文成绩<span ng-show="mainctrl.sortBy=='yuwen'">{{mainctrl.arrow}}</span></th>
+        <th>数学成绩<span ng-show="mainctrl.sortBy=='shuxue'">{{mainctrl.arrow}}</span></th>
+        <th>英语成绩<span ng-show="mainctrl.sortBy=='yinyu'">{{mainctrl.arrow}}</span></th>
+        <th>删除</th>
+    </tr>
+    <!-- ng-repeat可以按顺序迭代json对象中的项 -->
+    <tr ng-repeat="item in mainctrl.data">
+        <td>{{item.sid}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.yuwen}}</td>
+        <td>{{item.shuxue}}</td>
+        <td>{{item.yinyu}}</td>
+        <td><input type="button" value="删除" ng-click="mainctrl.remove(item.sid)"></td>
+    </tr>
+    </table>
+    <div class="form_box">
+        <p>
+            姓名 <input type="text" ng-model="mainctrl.formobj.sid">
+        </p>
+        <p>
+            学号 <input type="text" ng-model="mainctrl.formobj.name">
+        </p>
+        <p>
+            语文 <input type="text" ng-model="mainctrl.formobj.yuwen">
+        </p>
+        <p>
+            数学 <input type="text" ng-model="mainctrl.formobj.shuxue">
+        </p>
+        <p>
+            英语 <input type="text" ng-model="mainctrl.formobj.yinyu">
+        </p>
+        <p>
+            <input type="button" value="插入" ng-click="mainctrl.add()">
+        </p>
+    </div>
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+    myapp.controller("MainCtrl",[function(){
+        //json对象
+        this.data = [
+            {"sid":10001,"name":"小明","yuwen":99,"shuxue":99,"yinyu":99},
+            {"sid":10002,"name":"小明","yuwen":99,"shuxue":99,"yinyu":99},
+            {"sid":10003,"name":"小明","yuwen":99,"shuxue":99,"yinyu":99},
+            {"sid":10004,"name":"小明","yuwen":99,"shuxue":99,"yinyu":99}
+        ];
+        this.formobj = {};
+        var self = this;
+        this.add = function(){
+            self.data.push(self.formobj);
+            self.formobj = {};
+            //创建一个新对象。不然其实formobj一直是一个对象
+        }
+        this.remove = function(sid){
+            for(var i=0;i<self.data.length;i++){
+                if(self.data[i].sid==sid)
+                    self.data.splice(i,1);
+            }
+        }
+        // 按照学号排序
+        this.sortBy = "sid";
+        // 默认为升序
+        this.asc = true;
+        if (this.asc) 
+            this.arrow="↓";
+        else
+            this.arrow="↑";
+        this.SortBySid = function(){
+            if(this.asc){
+                alert(1);
+                this.asc = false;
+                for(var i=0;i<self.data.length;i++){
+                    for(var j=i;j<self.data.length-1;j++){
+                        if(self.data[j].sid<self.data[j+1].sid){
+                            var temp = self.data[j+1];
+                            self.data[j+1] = self.data[j];
+                            self.data[j] = temp;
+                        }
+                    }
+                }
+            }
+            else{
+                alert(2);
+                this.asc = true;
+                for(var i=0;i<self.data.length;i++){
+                    for(var j=i;j<self.data.length-1;j++){
+                        if(self.data[j].sid>self.data[j+1].sid){
+                            var temp = self.data[j+1];
+                            self.data[j+1] = self.data[j];
+                            self.data[j] = temp;
+                        }
+                    }
+                }
+            }
+        }
+    }]);
+    </script>
+</html>

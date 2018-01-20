@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	
+	<span class="item">item1</span>
+	<span class="item">item2</span>
+	<span class="item">item3</span>
+	<span class="item">item4</span>
+	<span class="item">item5</span>
+	<span class="item">item6</span>
+	<span class="item">item7</span>
+	<span class="item">item8</span>
+	<span class="item">item9</span>
+	<span class="item">item0</span>
+
+	<script>
+		// 取出符合要求的第一个元素，返回一个dom对象
+		var item = document.querySelector(".item");
+		console.log(item);
+		// 取出符合要求的所有元素，返回一个dom数组,与jquery不同,jquery返回的是
+		// 封装后的jquery数组
+		// querySelectorAll和类似html5方法其实就是把以前常用的方法给包装了一层
+		// 使调用更方便
+		var items = document.querySelectorAll(".item");
+		console.log(items);
+	</script>
+</body>
+</html>

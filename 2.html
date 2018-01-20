@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+    <body ng-app="myapp">
+    <!-- 实例化一个控制器,控制器必需在myapp内部 -->
+    <div ng-controller="MainCtrl as mainctrl">
+    
+        <h1 >{{mainctrl.a}}</h1>
+        <h1 >{{mainctrl.a}}</h1>
+    	<h1 >{{mainctrl.a}}</h1>
+        <input type="button" value="按我" ng-click="mainctrl.add()">
+    </div>
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+    myapp.controller("MainCtrl",[function(){
+    	this.a = 100;
+        this.add = function(){
+            this.a = this.a + 1;
+        }
+    }]);
+    </script>
+</html>

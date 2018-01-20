@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+   <!-- 一个项目只能有一个ng-app，标识angular的范围 -->
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <body ng-controller="MainCtrl as mainctrl">
+    {{mainctrl.get()}}
+    {{mainctrl.getArr()}}
+    <input type="button" value="set" ng-click="mainctrl.set()">
+    <input type="button" value="add" ng-click="mainctrl.add()">
+    <input type="button" value="change" ng-click="mainctrl.change()">
+    </body>
+    <script>
+    var myapp = angular.module('myapp', []);
+    //angular使用装饰者模式，调用方法来丰富自己
+    //创建一个控制器类MainCtrl
+    //MathService通过依赖注入，有效防止代码混淆
+    //导致变量名不对而产生bug
+    myapp.controller("MainCtrl",["MathService",function(MathService){
+        this.get = function(){
+            return MathService.get();
+        }
+        this.add = function(){
+            MathService.add();
+        }
+        this.change = function(){
+            // factory直接暴露基本类型值其实是传出副本，更改并不会影响到原值
+            MathService.m=100;
+            // factory暴露引用类型值时更改会影响到原值
+            MathService.arr.push(100);
+        }
+        this.set = function(){
+            MathService.set(1000)
+        }
+        this.getArr = function(){
+            return MathService.arr;
+        }
+    }]);
+    // myapp.factory("MathService",[function(){
+    //     // factory直接返回一个新对象，返回的不是this
+    //     this.m = 0
+    //     return{
+    //         a : 1
+    //     }
+    // }]);
+    myapp.factory("MathService",[function(){
+        // factory还可以返回函数，做api
+        // this.m无法被返回，只有var m能被返回，目测是因为factory在返回之后会被立刻销毁
+        // 而其中的var变量不会
+        // 
+        // service相当于提供了一个静态类，里面的方法直接用类名调用使用即可
+        // factory则返回新对象，或者返回api，有点像接口
+        var m = 0
+        var arr = []
+        function get(){
+            return m;
+        }
+        function add(){
+            m++;
+        }
+        function set(number){
+            m=number;
+        }
+        return{
+            get : get,
+            add : add,
+            m : m,
+            set : set,
+            arr : arr
+        }
+    }]);
+    </script>
+</html>
